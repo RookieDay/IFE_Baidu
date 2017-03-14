@@ -200,3 +200,19 @@ section {
     width: 500px;
     padding-top: 15px;
 }
+
+.section1 .sectionList {
+    margin-bottom: 15px;
+}
+
+.section1 .sectionList li {
+    font: 15px/22px "微软雅黑";
+}
+
+.sectionGoodImg li {
+    border: 1px solid #000;
+}
+
+.sectionGoodImg li img {
+    width: 500px;
+}
