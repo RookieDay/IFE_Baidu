@@ -211,8 +211,97 @@ section {
 
 .sectionGoodImg li {
     border: 1px solid #000;
+    width: 600px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
 }
 
 .sectionGoodImg li img {
     width: 500px;
+    display: block;
+    padding: 10px 50px 10px 50px;
+}
+
+.section1 .section1Order {
+    margin: 10px 0 10px 20px;
+}
+
+.section1 .section1Order ol li {
+    padding-bottom: 5px;
+    width: 100px;
+    height: 30px;
+    font: 20px/30px "黑体";
+}
+
+.section1 .sectionTable .sumTable {
+    margin-top: 5px;
+}
+
+.section1 .sectionTable .sumTable thead {
+    background-color: black;
+}
+
+.section1 .sectionTable .sumTable tfoot {
+    background-color: gray;
+}
+
+.section1 .sectionTable .sumTable tr th {
+    width: 300px;
+    height: 10px;
+    border-right: 1px solid gray;
+    text-align: left;
+}
+
+.section1 .sectionContent {
+    margin: 25px 0 5px 20px;
+    padding-left: 150px;
+}
+
+.section1 .sectionContent label {
+    display: inline-block;
+    font: 16px/16px "黑体";
+    margin-right: 5px;
+}
+
+.section1 .sectionContent input {
+    height: 17px;
+    line-height: 15px;
+    border: 1px solid gray;
+}
+
+.section1 .sectionContent .emailInput {
+    margin-bottom: 10px;
+}
+
+.section1 .sectionContent .psdInput {
+    margin-bottom: 10px;
+}
+
+.section1 .sectionContent .psdInput #psd {
+    margin-left: 40px;
+}
+
+.section1 .sectionContent .sexSelect input {
+    color: blue;
+}
+
+.section1 .sectionContent #rightPos {
+    padding: 10px 8px 10px 78px;
+}
+
+.section1 .sectionContent span {
+    display: block;
+    height: 16px;
+    font: 12px/16px "黑体";
+    color: #d2d2d2;
+    padding: 5px 0 5px 122px;
+}
+
+.footContent {
+    text-align: center;
+    height: 20px;
+    color: white;
+    background-color: black;
+    padding: 5px 0;
 }
