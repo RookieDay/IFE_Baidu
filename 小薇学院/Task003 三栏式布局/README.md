@@ -31,3 +31,9 @@ sticky
 
 - 粘性定位
 粘性定位是相对定位和固定定位的混合。元素在跨越特定阈值前为相对定位，之后为固定定位
+
+
+- [浮动布局](http://zh.learnlayout.com/clearfix.html)
+  [浮动黑科技](http://stackoverflow.com/questions/211383/what-methods-of-clearfix-can-i-use)
+  [浮动案例](http://www.barelyfitz.com/screencast/html-training/css/positioning/)
+  [浮动position](https://developer.mozilla.org/en-US/docs/Web/CSS/float)
