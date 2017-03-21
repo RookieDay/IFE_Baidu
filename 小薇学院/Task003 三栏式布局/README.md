@@ -37,3 +37,7 @@ sticky
   [浮动黑科技](http://stackoverflow.com/questions/211383/what-methods-of-clearfix-can-i-use)
   [浮动案例](http://www.barelyfitz.com/screencast/html-training/css/positioning/)
   [浮动position](https://developer.mozilla.org/en-US/docs/Web/CSS/float)
+
+  #div-1 {
+ position:static;
+}
