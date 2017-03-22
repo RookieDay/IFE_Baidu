@@ -1,0 +1,62 @@
+.container {
+    padding: 20px;
+    background-color: #eee;
+    border: 1px solid #999;
+    overflow: hidden;
+}
+
+ul li {
+    list-style: none;
+}
+
+.container img {
+    width: 80px;
+    height: 80px;
+}
+
+.container .team,
+.logo,
+.message {
+    border: 1px solid #000;
+    background-color: white;
+}
+
+.container .team {
+    float: left;
+    width: 200px;
+    height: 150px;
+    position: relative;
+}
+
+.container .team img {
+    float: left;
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
+}
+
+.container .team .teamName {
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.container .message {
+    /*min-width: 600px;*/
+    margin-left: 210px;
+    margin-right: 130px;
+}
+
+.container .logo {
+    float: right;
+    width: 120px;
+}
+
+.container .logo ul {
+    padding-left: 20px;
+}
+
+.container .logo ul>li {
+    margin-bottom: 10px;
+}
