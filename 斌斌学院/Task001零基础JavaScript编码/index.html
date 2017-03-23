@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 01</title>
+    <link rel="icon" href="favicon.ico">
 </head>
 
 <body>
@@ -21,7 +22,12 @@
             在事件处理函数中
             获取aqi-input输入的值，并显示在aqi-display中
             */
-
+            let btn = document.getElementById('button');
+            let aqiDis = document.getElementById('aqi-display');
+            btn.onclick = function() {
+                let aqiInVal = document.getElementById('aqi-input').value;
+                aqiDis.innerHTML = aqiInVal;
+            }
         })();
     </script>
 </body>

@@ -18,3 +18,7 @@
 - 在线学习参考资料
   +  [JavaScript入门篇](http://www.imooc.com/learn/36)
   +  [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) 
+
+- innerHTML()  它的作用是获得标签中的值，是节点的一个属性。标签大部分是这样的 ==》 【<xxx>aabb</xxx>】 ，而innerHTML获取的就是这个【aabb】，也就是被标签包裹的值。
+- innerText() 有的时候，我们输入的内容是一串html代码，这个时候，我们通过innerHTML取出来的被转换的代码，但是我们有的时候希望取出来的就是我们输入的html，这个时候，就需要用innerText来实现了。
+- node.value   有些标签会有value值，比如input，你可以这样定义一个input ==> <input id="aqi-input" value="input">,这样的话，你的input标签的默认值就是input，当你修改输入框中的值被你修改之后，这个value属性值也就被改变了，我们就可以通过【节点.value】来获得这个值。
