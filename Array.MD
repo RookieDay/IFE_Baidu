@@ -278,3 +278,124 @@ every 不会改变原数组。
 every 遍历的元素范围在第一次调用 callback 之前就已确定了。在调用 every 之后添加到数组中的元素不会被 callback 访问到。如果数组中存在的元素被更改，则他们传入 callback 的值是 every 访问到他们那一刻的值。那些被删除的元素或从来未被赋值的元素将不会被访问到。
 
  + fill() 方法将一个数组的所有元素从开始索引填充到具有静态值的结束索引
+ ```
+ var numbers = [1, 2, 3]
+numbers.fill(1);
+
+// results in [1, 1, 1]
+ ```
+ 语法
+arr.fill(value) 
+arr.fill(value, start) 
+arr.fill(value, start, end)
+
+参数
+value
+用来填充数组元素的值。
+start
+可选，开始索引。
+end
+可选，结束索引。
+
+返回值
+修改后的数组。
+
+描述
+具体要填充的元素区间是 [start, end) , 一个半开半闭区间.
+fill 方法接受三个参数 value, start 以及 end. start 和 end 参数是可选的, 其默认值分别为 0 和 this 对象的 length 属性值.
+如果 start 是个负数, 则开始索引会被自动计算成为 length+start, 其中 length 是 this 对象的 length 属性值. 如果 end 是个负数, 则结束索引会被自动计算成为 length+end.
+fill 方法故意被设计成通用方法, 也就是说它不需要 this 值必须是个数组对象, 类数组对象也是可以调用该方法的 .
+fill 方法是个可变方法, 它会改变调用它的 this 对象本身, 然后返回它, 而并不是返回一个副本
+
+
+```
+[1, 2, 3].fill(4)            // [4, 4, 4]
+[1, 2, 3].fill(4, 1)         // [1, 4, 4]
+[1, 2, 3].fill(4, 1, 2)      // [1, 4, 3]
+[1, 2, 3].fill(4, 1, 1)      // [1, 2, 3]
+[1, 2, 3].fill(4, -3, -2)    // [4, 2, 3]
+[1, 2, 3].fill(4, NaN, NaN)  // [1, 2, 3]
+Array(3).fill(4);            // [4, 4, 4]
+[].fill.call({length: 3}, 4) // {0: 4, 1: 4, 2: 4, length: 3}
+```
+
+ + filter() 方法使用指定的函数测试所有元素，并创建一个包含所有通过测试的元素的新数组。
+ 描述
+filter 为数组中的每个元素调用一次 callback 函数，并利用所有使得 callback 返回 true 或 等价于 true 的值 的元素创建一个新数组。callback 只会在已经赋值的索引上被调用，对于那些已经被删除或者从未被赋值的索引不会被调用。那些没有通过 callback 测试的元素会被跳过，不会被包含在新数组中。
+callback 被调用时传入三个参数：
+    元素的值
+    元素的索引
+    被遍历的数组
+如果为 filter 提供一个 thisArg 参数，则它会被作为 callback 被调用时的 this 值。否则，callback 的 this 值在非严格模式下将是全局对象，严格模式下为 undefined。
+The thisvalue ultimately observable by callback is determined according to the usual rules for determining thethis seen by a function.
+filter 不会改变原数组。
+filter 遍历的元素范围在第一次调用 callback 之前就已经确定了。在调用 filter 之后被添加到数组中的元素不会被 filter 遍历到。如果已经存在的元素被改变了，则他们传入 callback 的值是 filter 遍历到它们那一刻的值。被删除或从来未被赋值的元素不会被遍历到。
+
+ +  find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+ 示例
+用对象的属性查找数组里的对象
+```
+var inventory = [
+    {name: 'apples', quantity: 2},
+    {name: 'bananas', quantity: 0},
+    {name: 'cherries', quantity: 5}
+];
+function findCherries(fruit) { 
+    return fruit.name === 'cherries';
+}
+console.log(inventory.find(findCherries));
+```
+ + findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+ ```
+ function isBigEnough(element) {
+  return element >= 15;
+}
+
+[12, 5, 8, 130, 44].findIndex(isBigEnough); // 3
+ ```
+ + forEach() 方法对数组的每个元素执行一次提供的函数。
+ 语法
+array.forEach(callback(currentValue, index, array){
+    //do something
+}, this)
+
+array.forEach(callback[, thisArg])
+ 
+ ```
+ let a = ['a', 'b', 'c'];
+
+a.forEach(function(element) {
+    console.log(element);
+});
+
+// a
+// b
+// c
+ ```
+
+ 使用thisArg
+举个勉强的例子，从每个数组中的元素值中更新一个对象的属性：
+```
+function Counter() {
+    this.sum = 0;
+    this.count = 0;
+}
+
+Counter.prototype.add = function(array) {
+    array.forEach(function(entry) {
+        this.sum += entry;
+        ++this.count;
+    }, this);
+    //console.log(this);
+};
+
+var obj = new Counter();
+obj.add([1, 3, 5, 7]);
+
+obj.count; 
+// 4 === (1+1+1+1)
+obj.sum;
+// 16 === (1+3+5+7)
+```
+因为thisArg参数 (this) 传给了forEach()，每次调用时，它都被传给callback函数，作为它的this值。
+> 注意：如果使用箭头函数表达式传入函数参数，thisArg 参数会被忽略，因为箭头函数在词法上绑定了this值。
