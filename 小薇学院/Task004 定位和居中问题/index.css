@@ -1,0 +1,31 @@
+.container {
+    background-color: #ccc;
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    overflow: hidden;
+}
+
+.container .leftCircle,
+.rightCircle {
+    width: 100px;
+    height: 100px;
+    background-color: #fc0;
+    border-radius: 50px;
+}
+
+.container .leftCircle {
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+.container .rightCircle {
+    /*position: absolute;*/
+    float: right;
+    margin-right: -50px;
+    margin-top: 100px;
+}
