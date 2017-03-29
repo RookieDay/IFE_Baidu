@@ -13,27 +13,26 @@
         }
         
         ul>li {
-            width: 20px;
-            height: 20px;
+            /*width: 20px;
+            height: 20px;*/
             display: inline-block;
             background-color: red;
             text-align: center;
+            margin: 10px 10px;
         }
     </style>
 </head>
 
 <body>
-    <input type="text" id="dataValue" />
+    <input type="text" id="dataValue" placeholder="请输入数字" />
     <button type="" id="leftInBtn">左侧入</button>
     <button type="" id="rightInBtn">右侧入</button>
     <button type="" id="leftOutBtn">左侧出</button>
     <button type="" id="rightOutBtn">右侧出</button>
 
     <ul id="queueData">
-        <li>1</li>
-        <li>2</li>
     </ul>
-    <script>
+    <script type="text/javascript">
         function getId(btnType) {
             return document.getElementById(btnType);
         }
@@ -42,13 +41,57 @@
         let leftOut = getId('leftOutBtn');
         let rightOut = getId('rightOutBtn');
         let queueData = getId('queueData');
-        let dataValue = document.getElementById('dataValue');
+        let inputValue = document.getElementById('dataValue');
 
-        leftIn.onclick = function() {
-            if (queueData.childElementCount > 0) {
-
+        function vaildValue(value) {
+            if (value == "" || value == null || !value.match(/^[0-9]*$/)) {
+                return false;
             }
+            return true;
         }
+        leftIn.addEventListener('click', function() {
+            if (!vaildValue(inputValue.value)) {
+                alert('Please input number!')
+            } else {
+                let li = document.createElement('li');
+                var node = document.createTextNode(inputValue.value);
+                li.appendChild(node);
+                queueData.insertBefore(li, queueData.firstChild)
+            }
+        })
+
+        rightIn.addEventListener('click', function() {
+            if (!vaildValue(inputValue.value)) {
+                alert('Please input number!')
+            } else {
+                let li = document.createElement('li');
+                var node = document.createTextNode(inputValue.value);
+                li.appendChild(node);
+                queueData.appendChild(li);
+            }
+        })
+
+        leftOut.addEventListener('click', function() {
+            if (queueData.childElementCount > 0) {
+                queueData.removeChild(queueData.firstChild);
+            } else {
+                alert('You have no data')
+            }
+        })
+
+        rightOut.addEventListener('click', function() {
+            if (queueData.childElementCount > 0) {
+                queueData.removeChild(queueData.lastChild);
+            } else {
+                alert('You have no data')
+            }
+        })
+        queueData.addEventListener('click', function() {
+            if (event.target.nodeName.toLowerCase() == 'li') {
+                queueData.removeChild(event.target);
+            }
+            // console.log(event.target)
+        })
     </script>
 </body>
 
