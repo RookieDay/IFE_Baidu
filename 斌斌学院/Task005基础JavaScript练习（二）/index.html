@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>任务四：基础JavaScript练习（一）</title>
+    <link rel="icon" type="" href="favicon.ico">
+    <style>
+        ul {
+            list-style: none;
+        }
+        
+        ul>li {
+            display: inline-block;
+            background-color: red;
+            text-align: center;
+            margin: 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="dataValue" placeholder="请输入数字" />
+    <button type="" id="leftInBtn">左侧入</button>
+    <button type="" id="rightInBtn">右侧入</button>
+    <button type="" id="leftOutBtn">左侧出</button>
+    <button type="" id="rightOutBtn">右侧出</button>
+
+    <ul id="queueData">
+    </ul>
+    <script type="text/javascript">
+        function getId(btnType) {
+            return document.getElementById(btnType);
+        }
+        let leftIn = getId('leftInBtn');
+        let rightIn = getId('rightInBtn');
+        let leftOut = getId('leftOutBtn');
+        let rightOut = getId('rightOutBtn');
+        let queueData = getId('queueData');
+        let inputValue = document.getElementById('dataValue');
+
+        function vaildValue(value) {
+            if (value == "" || value == null || !value.match(/^[0-9]*$/)) {
+                return false;
+            }
+            return true;
+        }
+        leftIn.addEventListener('click', function() {
+            if (!vaildValue(inputValue.value)) {
+                alert('Please input number!')
+            } else {
+                let li = document.createElement('li');
+                var node = document.createTextNode(inputValue.value);
+                li.appendChild(node);
+                queueData.insertBefore(li, queueData.firstChild)
+            }
+        })
+
+        rightIn.addEventListener('click', function() {
+            if (!vaildValue(inputValue.value)) {
+                alert('Please input number!')
+            } else {
+                let li = document.createElement('li');
+                var node = document.createTextNode(inputValue.value);
+                li.appendChild(node);
+                queueData.appendChild(li);
+            }
+        })
+
+        leftOut.addEventListener('click', function() {
+            if (queueData.childElementCount > 0) {
+                queueData.removeChild(queueData.firstChild);
+            } else {
+                alert('You have no data')
+            }
+        })
+
+        rightOut.addEventListener('click', function() {
+            if (queueData.childElementCount > 0) {
+                queueData.removeChild(queueData.lastChild);
+            } else {
+                alert('You have no data')
+            }
+        })
+        queueData.addEventListener('click', function() {
+            if (event.target.nodeName.toLowerCase() == 'li') {
+                queueData.removeChild(event.target);
+            }
+            // console.log(event.target)
+        })
+    </script>
+</body>
+
+</html>
