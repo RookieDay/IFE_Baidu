@@ -18,6 +18,19 @@
             text-align: center;
             margin: 10px 10px;
         }
+        
+        button {
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+            white-space: nowrap;
+            vertical-align: middle;
+            background-color: blue;
+            border-radius: 2px;
+            border: 1px solid blue;
+            color: white;
+        }
     </style>
 </head>
 
@@ -27,69 +40,10 @@
     <button type="" id="rightInBtn">右侧入</button>
     <button type="" id="leftOutBtn">左侧出</button>
     <button type="" id="rightOutBtn">右侧出</button>
-
-    <ul id="queueData">
+    <button type="" id="sortBtn">排序</button>
+    <ul id="queueData" class="queueData">
     </ul>
-    <script type="text/javascript">
-        function getId(btnType) {
-            return document.getElementById(btnType);
-        }
-        let leftIn = getId('leftInBtn');
-        let rightIn = getId('rightInBtn');
-        let leftOut = getId('leftOutBtn');
-        let rightOut = getId('rightOutBtn');
-        let queueData = getId('queueData');
-        let inputValue = document.getElementById('dataValue');
-
-        function vaildValue(value) {
-            if (value == "" || value == null || !value.match(/^[0-9]*$/)) {
-                return false;
-            }
-            return true;
-        }
-        leftIn.addEventListener('click', function() {
-            if (!vaildValue(inputValue.value)) {
-                alert('Please input number!')
-            } else {
-                let li = document.createElement('li');
-                var node = document.createTextNode(inputValue.value);
-                li.appendChild(node);
-                queueData.insertBefore(li, queueData.firstChild)
-            }
-        })
-
-        rightIn.addEventListener('click', function() {
-            if (!vaildValue(inputValue.value)) {
-                alert('Please input number!')
-            } else {
-                let li = document.createElement('li');
-                var node = document.createTextNode(inputValue.value);
-                li.appendChild(node);
-                queueData.appendChild(li);
-            }
-        })
-
-        leftOut.addEventListener('click', function() {
-            if (queueData.childElementCount > 0) {
-                queueData.removeChild(queueData.firstChild);
-            } else {
-                alert('You have no data')
-            }
-        })
-
-        rightOut.addEventListener('click', function() {
-            if (queueData.childElementCount > 0) {
-                queueData.removeChild(queueData.lastChild);
-            } else {
-                alert('You have no data')
-            }
-        })
-        queueData.addEventListener('click', function() {
-            if (event.target.nodeName.toLowerCase() == 'li') {
-                queueData.removeChild(event.target);
-            }
-            // console.log(event.target)
-        })
+    <script type="text/javascript" src="./index.js">
     </script>
 </body>
 
