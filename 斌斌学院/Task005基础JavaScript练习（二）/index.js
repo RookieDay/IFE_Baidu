@@ -27,50 +27,50 @@ QueueElement.prototype = {
     },
     registEvent: function(obj) {
         this.leftInBtn.addEventListener('click', function() {
-                var data = obj.getInputValue(obj.inputContent);
-                obj._unshift(obj.dataContent, data, obj.data);
-            }),
-            this.rightInBtn.addEventListener('click', function() {
-                var data = obj.getInputValue(obj.inputContent);
-                obj._push(obj.dataContent, data, obj.data);
-            }),
-            this.leftOutBtn.addEventListener('click', function() {
-                obj._shift(obj.dataContent, obj.data);
-            }),
-            this.rightOutBtn.addEventListener('click', function() {
-                obj._pop(obj.dataContent, obj.data);
-            }),
-            this.dataContent.addEventListener('click', function(e) {
-                if (e.target && e.target.nodeName.toLowerCase() == 'li') {
-                    var index;
-                    var dataList = this.children;
-                    for (var i = 0; i < dataList.length; i++) {
-                        if (dataList[i] == e.target) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index >= 0) {
-                        // remove array data
-                        obj.data.splice(index, 1);
-                        // remove html 
-                        obj.dataContent.removeChild(e.target);
-                        alert('Removed:' + e.target.innerText + "Loc: " + (++index));
-                    } else {
-                        alert("failed!");
+            var data = obj.getInputValue(obj.inputContent);
+            obj._unshift(obj.dataContent, data, obj.data);
+        })
+        this.rightInBtn.addEventListener('click', function() {
+            var data = obj.getInputValue(obj.inputContent);
+            obj._push(obj.dataContent, data, obj.data);
+        })
+        this.leftOutBtn.addEventListener('click', function() {
+            obj._shift(obj.dataContent, obj.data);
+        })
+        this.rightOutBtn.addEventListener('click', function() {
+            obj._pop(obj.dataContent, obj.data);
+        })
+        this.dataContent.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName.toLowerCase() == 'li') {
+                var index;
+                var dataList = this.children;
+                for (var i = 0; i < dataList.length; i++) {
+                    if (dataList[i] == e.target) {
+                        index = i;
+                        break;
                     }
                 }
-            }),
-            this.sortBtn.addEventListener('click', function() {
-                obj.data = obj._bubbleSort(obj.data);
-                console.log(obj.data);
+                if (index >= 0) {
+                    // remove array data
+                    obj.data.splice(index, 1);
+                    // remove html 
+                    obj.dataContent.removeChild(e.target);
+                    alert('Removed:' + e.target.innerText + "Loc: " + (++index));
+                } else {
+                    alert("failed!");
+                }
+            }
+        })
+        this.sortBtn.addEventListener('click', function() {
+            obj.data = obj._bubbleSort(obj.data);
+            console.log(obj.data);
 
-                obj.dataContent.innerHTML = '';
-                obj.data.forEach(function(value, index) {
-                    var node = obj._createElementItem(value)
-                    document.getElementById("queueData").appendChild(node);
-                });
-            })
+            obj.dataContent.innerHTML = '';
+            obj.data.forEach(function(value, index) {
+                var node = obj._createElementItem(value)
+                document.getElementById("queueData").appendChild(node);
+            });
+        })
 
     },
     getInputValue: function(element) {
