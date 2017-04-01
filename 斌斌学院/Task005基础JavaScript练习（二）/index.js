@@ -27,20 +27,18 @@ QueueElement.prototype = {
     },
     registEvent: function(obj) {
         this.leftInBtn.addEventListener('click', function() {
-                var data = getInputValue(obj.inputContent);
+                var data = obj.getInputValue(obj.inputContent);
                 obj._unshift(obj.dataContent, data, obj.data);
             }),
             this.rightInBtn.addEventListener('click', function() {
-                var data = getInputValue(obj.inputContent);
+                var data = obj.getInputValue(obj.inputContent);
                 obj._push(obj.dataContent, data, obj.data);
             }),
             this.leftOutBtn.addEventListener('click', function() {
-                var data = getInputValue(obj.inputContent);
-                obj._shift(obj.dataContent, data, obj.data);
+                obj._shift(obj.dataContent, obj.data);
             }),
             this.rightOutBtn.addEventListener('click', function() {
-                var data = getInputValue(obj.inputContent);
-                obj._pop(obj.dataContent, data, obj.data);
+                obj._pop(obj.dataContent, obj.data);
             }),
             this.dataContent.addEventListener('click', function(e) {
                 if (e.target && e.target.nodeName.toLowerCase() == 'li') {
@@ -70,7 +68,7 @@ QueueElement.prototype = {
                 obj.dataContent.innerHTML = '';
                 obj.data.forEach(function(value, index) {
                     var node = obj._createElementItem(value)
-                    obj.element.appendChild(node);
+                    document.getElementById("queueData").appendChild(node);
                 });
             })
 
@@ -93,7 +91,7 @@ QueueElement.prototype = {
             queueData.unshift(data);
             if (this._judgeLength(queueData)) {
                 var node = this._createElementItem(data);
-                element.insertBefore(node, element.getElementById('queueData'));
+                element.insertBefore(node, document.getElementById('queueData').firstChild);
                 return queueData;
             } else {
                 alert('>60')
@@ -101,7 +99,7 @@ QueueElement.prototype = {
         }
         return queueData;
     },
-    push: function(element, data, queueData) {
+    _push: function(element, data, queueData) {
         if (data) {
             queueData.push(data);
             if (this._judgeLength(queueData)) {
@@ -114,14 +112,14 @@ QueueElement.prototype = {
         }
         return queueData;
     },
-    _shift: function(element, data, queueData) {
+    _shift: function(element, queueData) {
         if (queueData.length <= 0) {
             alert('empty list');
             return queueData;
         } else {
             alert('removed: ' + queueData[0]);
             queueData.shift();
-            element, removeChild(element.children[0]);
+            element.removeChild(element.children[0]);
             return queueData;
         }
     },
@@ -132,7 +130,7 @@ QueueElement.prototype = {
             console.error('列表已空，移除失败');
             return data_queue;
         } else {
-
+            console.log(data_queue)
             alert('移除的元素内数值为: ' + data_queue[length - 1]);
             data_queue.pop();
             element.removeChild(element.children[length - 1]);
@@ -146,8 +144,8 @@ QueueElement.prototype = {
             return true;
         }
     },
-    _createItemElement: function(data) {
-        var node = document.createElement("div");
+    _createElementItem: function(data) {
+        var node = document.createElement("li");
         node.innerText = data;
         node.setAttribute("data-num", data);
         node.style.height = data + 'px';
