@@ -138,19 +138,19 @@
             },
             _heapSort: function(arr) {
                 // http://www.cnblogs.com/zabery/archive/2011/07/26/2117103.html
-                buildMaxHeap(arr);
-
+                //http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/
+                this.buildMaxHeap(arr);
                 for (var i = arr.length - 1; i > 0; i--) {
-                    swap(arr, 0, i);
+                    this.swap(arr, 0, i);
                     len--;
-                    heapify(arr, 0);
+                    this.heapify(arr, 0);
                 }
                 return arr;
             },
             buildMaxHeap: function(arr) { //建立大顶堆
                 len = arr.length;
-                for (var i = Math.floor(len / 2); i & gt; = 0; i--) {
-                    heapify(arr, i);
+                for (var i = Math.floor(len / 2); i > 0; i--) {
+                    this.heapify(arr, i);
                 }
             },
             heapify: function(arr, i) { //堆调整
@@ -167,8 +167,8 @@
                 }
 
                 if (largest != i) {
-                    swap(arr, i, largest);
-                    heapify(arr, largest);
+                    this.swap(arr, i, largest);
+                    this.heapify(arr, largest);
                 }
             },
             swap: function(arr, i, j) {
@@ -176,7 +176,6 @@
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
-
         }
 
         var sort = new SortFunction(arr);
@@ -187,7 +186,7 @@
         console.log("插入排序：" + sort._insertSort());
         console.log("希尔排序：" + sort._shellSort());
         console.log("快速排序：" + sort._quickSort(arr));
-        console.log("堆 排序：" + sort._heapSort(arr));
+        console.log("堆 排序：" + sort._heapSort([10, 5, 2, 1, 13, 1, 6, 3, 9]));
     </script>
 </body>
 
