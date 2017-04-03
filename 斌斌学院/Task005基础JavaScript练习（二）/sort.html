@@ -5,22 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>排序</title>
 </head>
 
 <body>
     <script>
+        //排序总结
+        // http://www.cnblogs.com/dushao/p/6004883.html
+        //http://blog.csdn.net/fengyinchao/article/details/52667625
+        // http://www.cnblogs.com/JChen666/p/3360853.html
         let arr = [10, 5, 2, 1, 13, 1, 6, 3, 9];
-
-        // 冒泡排序算法的运作如下：（从后往前）
-        // 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
-        // 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
-        // 针对所有的元素重复以上的步骤，除了最后一个。
-        // 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较
+        var len;
         let SortFunction = function(arr) {
             this.arr = arr;
         }
         SortFunction.prototype = {
+            // 冒泡排序算法的运作如下：（从后往前）
+            // 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+            // 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
+            // 针对所有的元素重复以上的步骤，除了最后一个。
+            // 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较
             _bubbleSort: function() {
                 var i = this.arr.length,
                     j;
@@ -37,7 +41,35 @@
                 }
                 return this.arr;
             },
+            // 冒泡排序的一种优化， 优化思路：当一次遍历前后数组不产生变化时，说明该数组已经有序，结束排序。
+            _bubbleSortOpti: function() {
+                var i = this.arr.length,
+                    j;
+                var temp;
+                while (i > 0) {
+                    var exchange = 0;
+                    for (j = 0; j < i - 1; j++) {
+                        if (this.arr[j] > this.arr[j + 1]) {
+                            temp = this.arr[j];
+                            this.arr[j] = this.arr[j + 1]
+                            this.arr[j + 1] = temp;
+                            exchange = 1;
+                        }
+                    }
+                    if (!exchange) break;
+                    i--;
+                }
+                return this.arr;
+            },
             _selectSort: function() {
+                //    选择排序：
+                //    初始序列：{49 27 65 97 76 12 38}
+                // 　　第1趟：12与49交换：12{27 65 97 76 49 38}
+                // 　　第2趟：27不动　：12 27{65 97 76 49 38}
+                // 　　第3趟：65与38交换：12 27 38{97 76 49 65}
+                // 　　第4趟：97与49交换：12 27 38 49{76 97 65}
+                // 　　第5趟：76与65交换：12 27 38 49 65{97 76}
+                // 　　第6趟：97与76交换：12 27 38 49 65 76 97 完成
                 var i = this.arr.length,
                     j;
                 var min, temp;
@@ -47,19 +79,115 @@
                         if (this.arr[k] < this.arr[min]) {
                             min = k;
                         }
-                        temp = this.arr[i];
-                        this.arr[i] = this.arr[min];
+                        temp = this.arr[j];
+                        this.arr[j] = this.arr[min];
                         this.arr[min] = temp;
                     }
                 }
                 return this.arr;
+            },
+            _insertSort: function() {
+                //扑克牌
+                var len = this.arr.length;
+                var preIndex, current;
+                for (var i = 1; i < len; i++) {
+                    preIndex = i - 1;
+                    current = this.arr[i];
+                    while (preIndex >= 0 && this.arr[preIndex] > current) {
+                        this.arr[preIndex + 1] = this.arr[preIndex];
+                        preIndex--;
+                    }
+                    this.arr[preIndex + 1] = current;
+                }
+                return this.arr;
+            },
+            _shellSort: function() {
+                var len = this.arr.length;
+                var temp, gap = 1;
+                while (gap < len / 3) {
+                    gap = gap * 3 + 1;
+                }
+                for (gap; gap < 0; gap = Math.floor(gap / 3)) {
+                    for (var i = gap; i < len; i++) {
+                        temp = this.arr[i];
+                        for (var j = i - gap; j > 0 && this.arr[j] > temp; j -= gap) {
+                            this.arr[j + gap] = arr[j];
+                        }
+                        this.arr[j + gap] = temp;
+                    }
+                }
+                return this.arr;
+            },
+            _quickSort: function(arr) {
+                //     （1）在数据集之中，选择一个元素作为"基准"（pivot）。
+                // 　　（2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边。
+                // 　　（3）对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止。
+                if (arr.length < 1) return arr;
+                var pivotIndex = Math.floor(arr.length / 2);
+                var pivot = arr.splice(pivotIndex, 1)[0];
+                var left = [];
+                var right = [];
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] < pivot) {
+                        left.push(arr[i]);
+                    } else {
+                        right.push(arr[i]);
+                    }
+                }
+                return this._quickSort(left).concat([pivot], this._quickSort(right));
+            },
+            _heapSort: function(arr) {
+                // http://www.cnblogs.com/zabery/archive/2011/07/26/2117103.html
+                buildMaxHeap(arr);
+
+                for (var i = arr.length - 1; i > 0; i--) {
+                    swap(arr, 0, i);
+                    len--;
+                    heapify(arr, 0);
+                }
+                return arr;
+            },
+            buildMaxHeap: function(arr) { //建立大顶堆
+                len = arr.length;
+                for (var i = Math.floor(len / 2); i & gt; = 0; i--) {
+                    heapify(arr, i);
+                }
+            },
+            heapify: function(arr, i) { //堆调整
+                var left = 2 * i + 1,
+                    right = 2 * i + 2,
+                    largest = i;
+
+                if (left < len && arr[left] > arr[largest]) {
+                    largest = left;
+                }
+
+                if (right < len && arr[right] > arr[largest]) {
+                    largest = right;
+                }
+
+                if (largest != i) {
+                    swap(arr, i, largest);
+                    heapify(arr, largest);
+                }
+            },
+            swap: function(arr, i, j) {
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
+
         }
 
         var sort = new SortFunction(arr);
         console.log("原始数据：" + 　arr);
         console.log("冒泡排序：" + sort._bubbleSort());
+        console.log("优化冒泡：" + sort._bubbleSortOpti());
         console.log("选择排序：" + sort._selectSort());
+        console.log("插入排序：" + sort._insertSort());
+        console.log("希尔排序：" + sort._shellSort());
+        console.log("快速排序：" + sort._quickSort(arr));
+        console.log("堆 排序：" + sort._heapSort(arr));
     </script>
 </body>
 
