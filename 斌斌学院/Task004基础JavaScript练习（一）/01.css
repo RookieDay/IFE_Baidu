@@ -1,0 +1,35 @@
+textarea {
+    display: block;
+    margin: 10px 0px 10px 0;
+}
+
+input {
+    margin: 0 auto;
+    height: 20px;
+    width: 500px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    line-height: 20px;
+}
+
+.btnLiList button {
+    cursor: pointer;
+    height: 30px;
+    background-color: blue;
+    color: #fff;
+    margin: 20px 10px;
+    text-shadow: none;
+    border: 1px solid blue;
+    border-radius: 4px;
+}
+
+ul {
+    list-style: none;
+}
+
+.btnLiList .lists li {
+    display: inline-block;
+    background-color: red;
+    text-align: center;
+    margin: 10px 10px;
+}

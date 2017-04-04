@@ -71,7 +71,6 @@ QueueElement.prototype = {
                 document.getElementById("queueData").appendChild(node);
             });
         })
-
     },
     getInputValue: function(element) {
         var data = Number(element.value);
